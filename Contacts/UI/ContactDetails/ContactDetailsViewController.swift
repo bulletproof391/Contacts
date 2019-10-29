@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ContactDetailsViewController.swift
 //  Contacts
 //
 //  Created by Дмитрий Вашлаев on 29/10/2019.
@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ContactDetailsViewController: UIViewController {
+    @IBOutlet private var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 }
