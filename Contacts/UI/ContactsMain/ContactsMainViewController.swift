@@ -18,6 +18,7 @@ class ContactsMainViewController: UIViewController {
             tableView.register(UINib(nibName: identifier, bundle: nil),
                                forCellReuseIdentifier: identifier)
             tableView.dataSource = self
+            tableView.delegate = self
         }
     }
 
@@ -39,7 +40,6 @@ class ContactsMainViewController: UIViewController {
                                             action: #selector(sortItems))
         barButtonItem.tintColor = UIColor(red: 75 / 255, green: 0, blue: 130 / 255, alpha: 1)
         navigationItem.rightBarButtonItem = barButtonItem
-
     }
 
     @objc private func sortItems() {
@@ -58,13 +58,24 @@ extension ContactsMainViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactsMainCell",
+        let identifier = String(describing: ContactsMainCell.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                  for: indexPath)
 
         guard let contactsCell = cell as? ContactsMainCell else { return cell}
         contactsCell.set(name: "asd\nxcv", email: "weq@qwe.com")
 
         return contactsCell
+    }
+}
+
+extension ContactsMainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let contactDetailsViewController = UIStoryboard.makeViewController(ContactDetailsViewController.self,
+                                                                           from: GlobalConstants.Storyboard.main)
+        navigationController?.pushViewController(contactDetailsViewController, animated: true)
     }
 }
 

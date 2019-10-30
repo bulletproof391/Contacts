@@ -12,4 +12,8 @@ struct GlobalConstants {
     enum Images {
         static let icSort = "ic_sort"
     }
+
+    enum Storyboard {
+        static let main = "Main"
+    }
 }
