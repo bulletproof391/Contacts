@@ -16,4 +16,11 @@ class ContactDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        tableView.contentInset = .zero
+        tableView.scrollIndicatorInsets = .zero
+    }
 }

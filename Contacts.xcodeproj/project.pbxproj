@@ -10,6 +10,17 @@
 		0A3A75BA2368DC7E00BEBE5B /* ContactDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A75B82368DC7E00BEBE5B /* ContactDetailsCell.swift */; };
 		0A3A75BB2368DC7E00BEBE5B /* ContactDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A75B92368DC7E00BEBE5B /* ContactDetailsCell.xib */; };
 		0A3B7DFE236A07940086B553 /* UIStoryboard+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7DFD236A07940086B553 /* UIStoryboard+ViewController.swift */; };
+		0A3B7E05236A1B570086B553 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E04236A1B570086B553 /* EndPointType.swift */; };
+		0A3B7E07236A1C000086B553 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E06236A1C000086B553 /* HTTPMethod.swift */; };
+		0A3B7E09236A1C9D0086B553 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E08236A1C9D0086B553 /* HTTPTask.swift */; };
+		0A3B7E0B236A1D8E0086B553 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E0A236A1D8E0086B553 /* ParameterEncoding.swift */; };
+		0A3B7E0D236A1EB70086B553 /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E0C236A1EB70086B553 /* URLParameterEncoder.swift */; };
+		0A3B7E0F236A209A0086B553 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E0E236A209A0086B553 /* JSONParameterEncoder.swift */; };
+		0A3B7E11236A21A70086B553 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E10236A21A70086B553 /* NetworkRouter.swift */; };
+		0A3B7E13236A22C50086B553 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E12236A22C50086B553 /* Router.swift */; };
+		0A3B7E15236A27F60086B553 /* ContactsEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E14236A27F60086B553 /* ContactsEndPoint.swift */; };
+		0A3B7E18236A2B8B0086B553 /* ContactResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E17236A2B8B0086B553 /* ContactResponse.swift */; };
+		0A3B7E1A236A31110086B553 /* ContactsRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B7E19236A31110086B553 /* ContactsRequestManager.swift */; };
 		0A614A8C2368B03400235DD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A614A8B2368B03400235DD6 /* AppDelegate.swift */; };
 		0A614A8E2368B03400235DD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A614A8D2368B03400235DD6 /* SceneDelegate.swift */; };
 		0A614A902368B03400235DD6 /* ContactsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A614A8F2368B03400235DD6 /* ContactsMainViewController.swift */; };
@@ -26,6 +37,17 @@
 		0A3A75B82368DC7E00BEBE5B /* ContactDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsCell.swift; sourceTree = "<group>"; };
 		0A3A75B92368DC7E00BEBE5B /* ContactDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactDetailsCell.xib; sourceTree = "<group>"; };
 		0A3B7DFD236A07940086B553 /* UIStoryboard+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+ViewController.swift"; sourceTree = "<group>"; };
+		0A3B7E04236A1B570086B553 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		0A3B7E06236A1C000086B553 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		0A3B7E08236A1C9D0086B553 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		0A3B7E0A236A1D8E0086B553 /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		0A3B7E0C236A1EB70086B553 /* URLParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
+		0A3B7E0E236A209A0086B553 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
+		0A3B7E10236A21A70086B553 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
+		0A3B7E12236A22C50086B553 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		0A3B7E14236A27F60086B553 /* ContactsEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsEndPoint.swift; sourceTree = "<group>"; };
+		0A3B7E17236A2B8B0086B553 /* ContactResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactResponse.swift; sourceTree = "<group>"; };
+		0A3B7E19236A31110086B553 /* ContactsRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsRequestManager.swift; sourceTree = "<group>"; };
 		0A614A882368B03400235DD6 /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A614A8B2368B03400235DD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		0A614A8D2368B03400235DD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +90,64 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		0A3B7DFF236A18F90086B553 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0A3B7E16236A2B790086B553 /* Responses */,
+				0A3B7E03236A192A0086B553 /* EndPoint */,
+				0A3B7E01236A19140086B553 /* Manager */,
+				0A3B7E02236A19190086B553 /* Service */,
+				0A3B7E00236A190C0086B553 /* Encoding */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		0A3B7E00236A190C0086B553 /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				0A3B7E0A236A1D8E0086B553 /* ParameterEncoding.swift */,
+				0A3B7E0C236A1EB70086B553 /* URLParameterEncoder.swift */,
+				0A3B7E0E236A209A0086B553 /* JSONParameterEncoder.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
+		0A3B7E01236A19140086B553 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				0A3B7E19236A31110086B553 /* ContactsRequestManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		0A3B7E02236A19190086B553 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0A3B7E04236A1B570086B553 /* EndPointType.swift */,
+				0A3B7E06236A1C000086B553 /* HTTPMethod.swift */,
+				0A3B7E08236A1C9D0086B553 /* HTTPTask.swift */,
+				0A3B7E10236A21A70086B553 /* NetworkRouter.swift */,
+				0A3B7E12236A22C50086B553 /* Router.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		0A3B7E03236A192A0086B553 /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				0A3B7E14236A27F60086B553 /* ContactsEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		0A3B7E16236A2B790086B553 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				0A3B7E17236A2B8B0086B553 /* ContactResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
 		0A614A7F2368B03400235DD6 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +171,7 @@
 				0A614A8B2368B03400235DD6 /* AppDelegate.swift */,
 				0A614A8D2368B03400235DD6 /* SceneDelegate.swift */,
 				0A8D4EFF2368C44C00CA44BA /* UI */,
+				0A3B7DFF236A18F90086B553 /* Networking */,
 				0A3B7DFC236A07730086B553 /* Library */,
 				0AC50C812368D422003ABC8F /* Misc */,
 				0A8D4F022368C5A500CA44BA /* Resources */,
@@ -248,13 +329,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A3B7E1A236A31110086B553 /* ContactsRequestManager.swift in Sources */,
 				0A614A902368B03400235DD6 /* ContactsMainViewController.swift in Sources */,
 				0A8D4F092368C8BF00CA44BA /* ContactsMainCell.swift in Sources */,
+				0A3B7E11236A21A70086B553 /* NetworkRouter.swift in Sources */,
+				0A3B7E05236A1B570086B553 /* EndPointType.swift in Sources */,
+				0A3B7E15236A27F60086B553 /* ContactsEndPoint.swift in Sources */,
 				0A3A75BA2368DC7E00BEBE5B /* ContactDetailsCell.swift in Sources */,
 				0AC50C852368D992003ABC8F /* ContactDetailsViewController.swift in Sources */,
 				0AC50C832368D439003ABC8F /* GlobalConstants.swift in Sources */,
+				0A3B7E0B236A1D8E0086B553 /* ParameterEncoding.swift in Sources */,
+				0A3B7E18236A2B8B0086B553 /* ContactResponse.swift in Sources */,
+				0A3B7E13236A22C50086B553 /* Router.swift in Sources */,
 				0A614A8C2368B03400235DD6 /* AppDelegate.swift in Sources */,
+				0A3B7E0D236A1EB70086B553 /* URLParameterEncoder.swift in Sources */,
+				0A3B7E09236A1C9D0086B553 /* HTTPTask.swift in Sources */,
 				0A614A8E2368B03400235DD6 /* SceneDelegate.swift in Sources */,
+				0A3B7E07236A1C000086B553 /* HTTPMethod.swift in Sources */,
+				0A3B7E0F236A209A0086B553 /* JSONParameterEncoder.swift in Sources */,
 				0A3B7DFE236A07940086B553 /* UIStoryboard+ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

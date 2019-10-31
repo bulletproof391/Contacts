@@ -27,6 +27,18 @@ class ContactsMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
+
+        let requestManager = ContactsRequestManager()
+        requestManager.getContacts { response, errorString in
+            print(response)
+        }
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        tableView.contentInset = .zero
+        tableView.scrollIndicatorInsets = .zero
     }
 
     // MARK: - Private methods
