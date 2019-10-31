@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias OnVoidHandler = () -> Void
+
 struct GlobalConstants {
     enum Images {
         static let icSort = "ic_sort"

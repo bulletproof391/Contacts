@@ -8,18 +8,24 @@
 
 import UIKit
 
-class ContactsMainViewController: UIViewController {
+final class ContactsMainViewController: UIViewController {
+    typealias OnDetailsScreen = (ContactDetailsViewModel) -> Void
 
     // MARK: - Outlets
 
     @IBOutlet private var tableView: UITableView! {
         didSet {
-            let identifier = String(describing: ContactsMainCell.self)
-            tableView.register(UINib(nibName: identifier, bundle: nil),
-                               forCellReuseIdentifier: identifier)
-            tableView.dataSource = self
-            tableView.delegate = self
+            tableView.register(with: ContactsMainCell.identifier)
+            tableManager.tableView = tableView
         }
+    }
+
+    // MARK: - Private properties
+
+    private let tableManager: TableManager = BaseTableManager()
+    private let viewModel = ContactsMainViewModel(requestManager: ContactsRequestManager())
+    private lazy var onDetailsScreen: OnDetailsScreen? = { [weak self] detailsScreenViewModel in
+        self?.showDetailsController(detailsScreenViewModel)
     }
 
     // MARK: - View controller lifecycle
@@ -28,9 +34,9 @@ class ContactsMainViewController: UIViewController {
         super.viewDidLoad()
         setupViewController()
 
-        let requestManager = ContactsRequestManager()
-        requestManager.getContacts { response, errorString in
-            print(response)
+        viewModel.onDetailsScreen = onDetailsScreen
+        viewModel.getContacts { [weak self] sections in
+            self?.tableManager.setSections(sections)
         }
     }
 
@@ -50,7 +56,7 @@ class ContactsMainViewController: UIViewController {
                                             style: .plain,
                                             target: self,
                                             action: #selector(sortItems))
-        barButtonItem.tintColor = UIColor(red: 75 / 255, green: 0, blue: 130 / 255, alpha: 1)
+        barButtonItem.tintColor = Constant.barButtonColor
         navigationItem.rightBarButtonItem = barButtonItem
     }
 
@@ -58,35 +64,11 @@ class ContactsMainViewController: UIViewController {
 
     }
 
-}
-
-extension ContactsMainViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = String(describing: ContactsMainCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
-                                                 for: indexPath)
-
-        guard let contactsCell = cell as? ContactsMainCell else { return cell}
-        contactsCell.set(name: "asd\nxcv", email: "weq@qwe.com")
-
-        return contactsCell
-    }
-}
-
-extension ContactsMainViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-
+    private func showDetailsController(_ detailsScreenViewModel: ContactDetailsViewModel) {
         let contactDetailsViewController = UIStoryboard.makeViewController(ContactDetailsViewController.self,
                                                                            from: GlobalConstants.Storyboard.main)
+
+        contactDetailsViewController.viewModel = detailsScreenViewModel
         navigationController?.pushViewController(contactDetailsViewController, animated: true)
     }
 }
@@ -94,5 +76,6 @@ extension ContactsMainViewController: UITableViewDelegate {
 private extension ContactsMainViewController {
     enum Constant {
         static let title = "Contacts"
+        static let barButtonColor = UIColor(red: 75 / 255, green: 0, blue: 130 / 255, alpha: 1)
     }
 }
