@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactsMainCell: UITableViewCell {
+final class ContactsMainCell: UITableViewCell, SetupableCell {
 
     // MARK: - Outlets
 
@@ -19,23 +19,49 @@ class ContactsMainCell: UITableViewCell {
     }
     @IBOutlet private var emailLabel: UILabel!
 
-    // MARK: - Cell lifecycle
+    // MARK: - Public properties
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var viewModel: CellViewModel! {
+        didSet {
+            updateCell()
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    // MARK: - Private methods
 
-        // Configure the view for the selected state
+    private func updateCell() {
+        guard let contactsMainCellViewModel = viewModel as? ContactsMainCellViewModel else { return }
+
+        nameLabel.text = contactsMainCellViewModel.name
+        emailLabel.text = contactsMainCellViewModel.email
+    }
+}
+
+final class ContactsMainCellViewModel: CellViewModel, CellViewModelActionable {
+
+    // MARK: - Public properties
+
+    var identifier: String {
+        return ContactsMainCell.identifier
+    }
+
+    var onTap: ((IndexPath) -> Void)?
+
+    // MARK: - Private properties
+
+    let name: String
+    let email: String
+
+    // MARK: - Initializers
+
+    init(name: String, email: String) {
+        self.name = name
+        self.email = email
     }
 
     // MARK: - Public methods
 
-    func set(name: String, email: String) {
-        nameLabel.text = name
-        emailLabel.text = email
+    func performAction(at indexPath: IndexPath) {
+        onTap?(indexPath)
     }
 }

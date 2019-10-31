@@ -8,30 +8,48 @@
 
 import UIKit
 
-class ContactDetailsCell: UITableViewCell {
+final class ContactDetailsCell: UITableViewCell, SetupableCell {
 
     // MARK: - Outlets
 
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var descriptionLabel: UILabel!
 
-    // MARK: - Cell lifecycle
+    // MARK: - Public properties
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var viewModel: CellViewModel! {
+        didSet {
+            updateCell()
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    // MARK: - Private methods
 
-        // Configure the view for the selected state
+    private func updateCell() {
+        guard let contactDetailsCellViewModel = viewModel as? ContactDetailsCellViewModel else { return }
+
+        titleLabel.text = contactDetailsCellViewModel.title
+        descriptionLabel.text = contactDetailsCellViewModel.description
+    }
+}
+
+final class ContactDetailsCellViewModel: CellViewModel {
+
+    // MARK: - Public properties
+
+    var identifier: String {
+        return ContactDetailsCell.identifier
     }
 
-    // MARK: - Public methods
+    // MARK: - Private properties
 
-    func set(title: String, description: String) {
-        titleLabel.text = title
-        descriptionLabel.text = description
+    let title: String
+    let description: String
+
+    // MARK: - Initializers
+
+    init(title: String, description: String) {
+        self.title = title
+        self.description = description
     }
 }

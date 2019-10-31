@@ -8,13 +8,32 @@
 
 import UIKit
 
-class ContactDetailsViewController: UIViewController {
-    @IBOutlet private var tableView: UITableView!
+final class ContactDetailsViewController: UIViewController {
+
+    // MARK: - Outlets
+
+    @IBOutlet private var tableView: UITableView! {
+        didSet {
+            tableView.register(with: ContactDetailsCell.identifier)
+            tableView.allowsSelection = false
+            tableManager.tableView = tableView
+        }
+    }
+
+    // MARK: - Public properties
+
+    var viewModel: ContactDetailsViewModel!
+
+    // MARK: - Private properties
+
+    private let tableManager: TableManager = BaseTableManager()
+
+    // MARK: - View controller lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableManager.setSections(viewModel.sections)
     }
 
     override func viewWillLayoutSubviews() {

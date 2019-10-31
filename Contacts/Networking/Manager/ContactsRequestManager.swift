@@ -23,9 +23,13 @@ enum NetworkResponse: String {
     case unableToDecode = "We could not decode the response"
 }
 
-struct ContactsRequestManager {
-    typealias GetContactsCompletion = (_ movie: [ContactResponse]?, _ error: String?) -> Void
+typealias GetContactsCompletion = (_ contacts: [ContactResponse]?, _ error: String?) -> Void
 
+protocol ContactsRequesting {
+    func getContacts(completion: @escaping GetContactsCompletion)
+}
+
+struct ContactsRequestManager: ContactsRequesting {
     static let environment: Environment = .dev
     private let router = Router<ContactsApi>()
 
@@ -45,13 +49,9 @@ struct ContactsRequestManager {
                     }
 
                     do {
-                        print(responseData)
-                        let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
-                        print(jsonData)
                         let apiResponse = try JSONDecoder().decode([ContactResponse].self, from: responseData)
                         completion(apiResponse, nil)
                     } catch {
-                        print(error)
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
                     }
 
