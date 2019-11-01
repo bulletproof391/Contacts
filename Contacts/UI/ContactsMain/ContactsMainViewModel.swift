@@ -23,7 +23,6 @@ final class ContactsMainViewModel {
 
     init(requestManager: ContactsRequesting) {
         self.requestManager = requestManager
-//        self.sections = []
         self.response = []
     }
 
