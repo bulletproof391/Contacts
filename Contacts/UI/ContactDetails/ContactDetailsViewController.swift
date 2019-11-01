@@ -34,6 +34,7 @@ final class ContactDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         tableManager.setSections(viewModel.sections)
+        title = Constant.title
     }
 
     override func viewWillLayoutSubviews() {
@@ -41,5 +42,11 @@ final class ContactDetailsViewController: UIViewController {
 
         tableView.contentInset = .zero
         tableView.scrollIndicatorInsets = .zero
+    }
+}
+
+extension ContactDetailsViewController {
+    enum Constant {
+        static let title = "Contacts"
     }
 }

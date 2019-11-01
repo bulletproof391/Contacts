@@ -55,6 +55,7 @@ final class ContactsMainViewController: UIViewController {
                                             action: #selector(sortItems))
         barButtonItem.tintColor = Constant.barButtonColor
         navigationItem.rightBarButtonItem = barButtonItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         view.addSubview(loaderView)
         loaderView.snp.makeConstraints {
