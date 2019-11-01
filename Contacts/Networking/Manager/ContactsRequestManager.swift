@@ -35,8 +35,13 @@ struct ContactsRequestManager: ContactsRequesting {
 
     func getContacts(completion: @escaping GetContactsCompletion) {
         router.request(.users) { data, response, error in
-            if error != nil {
-                completion(nil, "Please check your network connection")
+            if let connectionError = error as NSError? {
+                if connectionError.code == NSURLErrorNotConnectedToInternet {
+                    self.router.cachePolicy = .returnCacheDataDontLoad
+                    self.getContacts(completion: completion)
+                } else {
+                    completion(nil, "Something goes wrong")
+                }
             }
 
             if let response = response as? HTTPURLResponse {
