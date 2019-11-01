@@ -12,7 +12,11 @@ final class ContactDetailsCell: UITableViewCell, SetupableCell {
 
     // MARK: - Outlets
 
-    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var titleLabel: UILabel! {
+        didSet {
+            titleLabel.numberOfLines = 0
+        }
+    }
     @IBOutlet private var descriptionLabel: UILabel!
 
     // MARK: - Public properties

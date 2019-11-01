@@ -20,10 +20,15 @@ protocol CellViewModelActionable {
     func performAction(at indexPath: IndexPath)
 }
 
+protocol CellComparing {
+    var comparingValue: String { get }
+}
+
 protocol TableManager: AnyObject {
     var tableView: UITableView? { get set }
     var sections: [[CellViewModel]] { get }
     func setSections(_ sections: [[CellViewModel]])
+    func sort(ascending: Bool)
 }
 
 final class BaseTableManager: NSObject, TableManager {
@@ -37,7 +42,25 @@ final class BaseTableManager: NSObject, TableManager {
 
     func setSections(_ sections: [[CellViewModel]]) {
         self.sections = sections
+        reload()
+    }
 
+    func sort(ascending: Bool) {
+        sections = sections.map { cellViewModels in
+            cellViewModels.sorted { previousCell, nextCell in
+                guard let comparablePreviousCell = previousCell as? CellComparing,
+                    let comparableNextCell = nextCell as? CellComparing else { return false }
+
+                return ascending
+                    ? comparablePreviousCell.comparingValue <= comparableNextCell.comparingValue
+                    : comparablePreviousCell.comparingValue >= comparableNextCell.comparingValue
+            }
+        }
+
+        reload()
+    }
+
+    func reload() {
         DispatchQueue.main.async { [weak self] in
             self?.tableView?.reloadData()
         }

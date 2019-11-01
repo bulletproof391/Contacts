@@ -24,6 +24,7 @@ final class ContactsMainViewController: UIViewController {
 
     private let tableManager: TableManager = BaseTableManager()
     private let viewModel = ContactsMainViewModel(requestManager: ContactsRequestManager())
+    private let loaderView = LoaderView()
     private lazy var onDetailsScreen: OnDetailsScreen? = { [weak self] detailsScreenViewModel in
         self?.showDetailsController(detailsScreenViewModel)
     }
@@ -33,11 +34,7 @@ final class ContactsMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
-
-        viewModel.onDetailsScreen = onDetailsScreen
-        viewModel.getContacts { [weak self] sections in
-            self?.tableManager.setSections(sections)
-        }
+        getContacts()
     }
 
     override func viewWillLayoutSubviews() {
@@ -58,10 +55,53 @@ final class ContactsMainViewController: UIViewController {
                                             action: #selector(sortItems))
         barButtonItem.tintColor = Constant.barButtonColor
         navigationItem.rightBarButtonItem = barButtonItem
+
+        view.addSubview(loaderView)
+        loaderView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
+    }
+
+    private func getContacts() {
+        handle(isLoading: true)
+
+        viewModel.onDetailsScreen = onDetailsScreen
+        viewModel.getContacts { [weak self] sections in
+            self?.handle(isLoading: false)
+            self?.tableManager.setSections(sections)
+        }
     }
 
     @objc private func sortItems() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
+        alert.addAction(UIAlertAction(title: "Sort by A-Z", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.tableManager.sort(ascending: true)
+        })
+
+        alert.addAction(UIAlertAction(title: "Sort by Z-A", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.tableManager.sort(ascending: false)
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.dismiss(animated: true, completion: nil)
+        })
+
+        present(alert, animated: true)
+    }
+
+    private func handle(isLoading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            if isLoading {
+                self?.loaderView.startAnimating()
+                self?.tableView.isHidden = true
+            } else {
+                self?.loaderView.stopAnimating()
+                self?.tableView.isHidden = false
+            }
+        }
     }
 
     private func showDetailsController(_ detailsScreenViewModel: ContactDetailsViewModel) {

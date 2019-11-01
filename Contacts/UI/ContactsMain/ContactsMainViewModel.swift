@@ -17,14 +17,13 @@ final class ContactsMainViewModel {
     // MARK: - Private properties
 
     private let requestManager: ContactsRequesting
-    private var sections: [[CellViewModel]]
     private var response: [ContactResponse]
 
     // MARK: - Initializers
 
     init(requestManager: ContactsRequesting) {
         self.requestManager = requestManager
-        self.sections = []
+//        self.sections = []
         self.response = []
     }
 
@@ -37,23 +36,31 @@ final class ContactsMainViewModel {
             let response = contactsResponse ?? []
             self.response = response
 
-            let viewModels: [CellViewModel] = response.compactMap {
-                let name = $0.name ?? ""
-                let email = $0.email ?? ""
+            let viewModels: [CellViewModel] = self.makeViewModels(from: response)
 
-                let cellViewModel = ContactsMainCellViewModel(name: name, email: email)
-                cellViewModel.onTap = { indexPath in
-                    guard indexPath.row < self.response.count else { return }
+            completion(viewModels.isEmpty ? [] : [viewModels])
+        }
+    }
 
-                    let detailsScrenViewModel = ContactDetailsViewModel(contact: self.response[indexPath.row])
-                    self.onDetailsScreen?(detailsScrenViewModel)
-                }
+    // MARK: - Private methods
 
-                return cellViewModel
+    private func makeViewModels(from response: [ContactResponse]) -> [CellViewModel] {
+        return response.compactMap {
+            let name = $0.name ?? ""
+            let email = $0.email ?? ""
+
+            let cellViewModel = ContactsMainCellViewModel(name: name, email: email, id: $0.id)
+            cellViewModel.onTap = { id in
+                guard let contact = self.response.first(where: {
+                    guard let contactId = $0.id else { return false }
+                    return contactId == id
+                }) else { return }
+
+                let detailsScrenViewModel = ContactDetailsViewModel(contact: contact)
+                self.onDetailsScreen?(detailsScrenViewModel)
             }
 
-            self.sections = viewModels.isEmpty ? [] : [viewModels]
-            completion(self.sections)
+            return cellViewModel
         }
     }
 }
