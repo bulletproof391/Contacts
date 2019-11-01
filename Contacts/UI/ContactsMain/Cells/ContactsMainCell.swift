@@ -37,7 +37,7 @@ final class ContactsMainCell: UITableViewCell, SetupableCell {
     }
 }
 
-final class ContactsMainCellViewModel: CellViewModel, CellViewModelActionable {
+final class ContactsMainCellViewModel: CellViewModel, CellViewModelActionable, CellComparing {
 
     // MARK: - Public properties
 
@@ -45,23 +45,30 @@ final class ContactsMainCellViewModel: CellViewModel, CellViewModelActionable {
         return ContactsMainCell.identifier
     }
 
-    var onTap: ((IndexPath) -> Void)?
+    var comparingValue: String {
+        return name
+    }
+
+    var onTap: ((Int) -> Void)?
 
     // MARK: - Private properties
 
     let name: String
     let email: String
+    let id: Int?
 
     // MARK: - Initializers
 
-    init(name: String, email: String) {
+    init(name: String, email: String, id: Int?) {
         self.name = name
         self.email = email
+        self.id = id
     }
 
     // MARK: - Public methods
 
     func performAction(at indexPath: IndexPath) {
-        onTap?(indexPath)
+        guard let id = id else { return }
+        onTap?(id)
     }
 }
