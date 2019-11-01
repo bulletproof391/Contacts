@@ -10,6 +10,7 @@ import Foundation
 
 class Router<EndPoint: EndPointType>: NetworkRouter {
 
+    var cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
     private var task: URLSessionTask?
 
     func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
@@ -33,7 +34,7 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
     func buildRequest(from route: EndPoint) throws -> URLRequest {
 
         var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path),
-                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                                 cachePolicy: cachePolicy,
                                  timeoutInterval: 10.0)
 
         request.httpMethod = route.httpMethod.rawValue
